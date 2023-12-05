@@ -73,11 +73,8 @@ def Prix_MC(T,N,M,sigma,r):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    # # Exemple de traçage en 3D avec ajout de label
-    # sc = ax.scatter3D(x, y, z, label='Points 3D')
 
-
-    # Trajectoires pour chaque action
+    # Paths fo each stock
     for n in range(NB_stocks):
         ax.plot(range(T), St[n, :])
 
@@ -98,14 +95,14 @@ if __name__ == '__main__':
     Prix_Best_0f_Call, std_BO_Call = Prix_MC(T,N,M,sigma,r)
     print('Prix Best Of Call: ', Prix_Best_0f_Call)
 
-    # Calcul de la moyenne et de l'écart type
-    ecart_type = std_BO_Call#, ddof=1)  # Utilisez ddof=1 pour calculer l'écart type de l'échantillon
+    # Mean, Std
+    ecart_type = std_BO_Call
 
-    # Choisissez le niveau de confiance (par exemple, 95%)
+    # Level: 95%
     niveau_confiance = 0.95
-    coefficient = 1.96  # Pour un niveau de confiance de 95%
+    coefficient = 1.96  
 
-    # Calcul de l'intervalle de confiance
+    # Calcul of Confidence Level
     if M > 1:
         intervalle_confiance = (Prix_Best_0f_Call - coefficient * ecart_type / np.sqrt(M),
                                 Prix_Best_0f_Call + coefficient * ecart_type / np.sqrt(M))
